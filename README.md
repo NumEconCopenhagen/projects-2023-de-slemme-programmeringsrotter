@@ -1,7 +1,7 @@
 # \[Group name\]
 
 **Group members:**
-- A
+- Nicholas Stampe Meier (KFM411)
 - B
 - C
 
