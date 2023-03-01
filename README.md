@@ -2,8 +2,8 @@
 
 **Group members:**
 - Nicholas Stampe Meier (KFM411)
-- B
-- C
+- B Kaya
+- C Oliver
 
 This repository contains  
 1. Inaugural project. 
