@@ -3,7 +3,7 @@
 **Group members:**
 - Nicholas Stampe Meier (KFM411)
 - B Kaya
-- C Oliver
+- Oliver Nyrop Weeks (VSN684)
 
 This repository contains  
 1. Inaugural project. 
