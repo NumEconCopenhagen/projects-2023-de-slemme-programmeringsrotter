@@ -1,3 +1,4 @@
+
 from types import SimpleNamespace
 
 import numpy as np
@@ -108,7 +109,22 @@ class HouseholdSpecializationModelClass:
     def solve(self,do_print=False):
         """ solve model continously """
 
-        pass    
+        # define parameters and namespaces
+        par = self.par
+        sol = self.sol
+        opt = SimpleNamespace()  
+        
+        # constraints and bounds; 
+        # constraints define that e.g. male cannot have the sum of work hours and household hours be more than 24.
+        # bounds define that one cannot work more than 24 in either household or work hours
+        constraints_m = ({'type': 'ineq', 'fun': lambda x: 24 - x[0] - x[1]}) 
+        constraints_f = ({'type': 'ineq', 'fun': lambda x: 24 - x[2] - x[3]}) 
+        bounds = [(0,24)]*4 
+
+        # 
+        print(f'Bounds for [LM, HM, LF, HF]: {bounds}\n')
+
+
 
     def solve_wF_vec(self,discrete=False):
         """ solve model for vector of female wages """
