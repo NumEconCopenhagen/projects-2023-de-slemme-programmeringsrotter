@@ -2,7 +2,7 @@
 
 **Group members:**
 - Nicholas Stampe Meier (KFM411)
-- B Kaya
+- Kaya Maria Friis Jensen (XCL313)
 - Oliver Nyrop Weeks (VSN684)
 
 This repository contains  
