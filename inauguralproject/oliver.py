@@ -128,7 +128,6 @@ class HouseholdSpecializationModelClass:
 
         # call optimizer
         initial_guess = [10]*4
-        print(initial_guess)
         res = optimize.minimize(lambda x: -self.calc_utility(x[0],x[1],x[2],x[3]), initial_guess, method='SLSQP', bounds=bounds, constraints=constraints)
         
         # save results into opt values
