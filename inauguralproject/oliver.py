@@ -119,12 +119,32 @@ class HouseholdSpecializationModelClass:
         # bounds define that one cannot work more than 24 in either household or work hours
         constraints_m = ({'type': 'ineq', 'fun': lambda x: 24 - x[0] - x[1]}) 
         constraints_f = ({'type': 'ineq', 'fun': lambda x: 24 - x[2] - x[3]}) 
+        constraints = [constraints_m, constraints_f]
         bounds = [(0,24)]*4 
 
-        # 
+        # print bounds for additional info; output seems correct
+        print("Bound test:")
         print(f'Bounds for [LM, HM, LF, HF]: {bounds}\n')
 
+        # call optimizer
+        initial_guess = [10]*4
+        print(initial_guess)
+        res = optimize.minimize(lambda x: -self.calc_utility(x[0],x[1],x[2],x[3]), initial_guess, method='SLSQP', bounds=bounds, constraints=constraints)
+        
+        # save results into opt values
+        opt.LM = res.x[0]
+        opt.HM = res.x[1]
+        opt.LF = res.x[2]
+        opt.HF = res.x[3]
 
+        # print out the values of opt
+        print("Optimal choices:")
+        if do_print:
+            for k,v in opt.__dict__.items():
+                print(f'{k} = {v:6.4f}')
+
+        return opt
+    
 
     def solve_wF_vec(self,discrete=False):
         """ solve model for vector of female wages """
