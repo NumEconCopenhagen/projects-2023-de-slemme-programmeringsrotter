@@ -1,6 +1,6 @@
 # \[Group name\]
 
-**Group members:**
+***Group members:***
 - Nicholas Stampe Meier (KFM411)
 - Kaya Maria Friis Jensen (XCL313)
 - Oliver Nyrop Weeks (VSN684)
