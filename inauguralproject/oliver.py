@@ -124,7 +124,7 @@ class HouseholdSpecializationModelClass:
 
         # print bounds for additional info; output seems correct
         print("Bound test:")
-        print(f'Bounds for [LM, HM, LF, HF]: {bounds}\n')
+        print(f'Bounds for [LM, HM, LF, HF]: {bounds}')
 
         # call optimizer
         initial_guess = [10]*4
