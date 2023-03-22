@@ -1,4 +1,3 @@
-
 from types import SimpleNamespace
 
 import numpy as np
@@ -21,6 +20,7 @@ class HouseholdSpecializationModelClass:
         par.nu = 0.001
         par.epsilon = 1.0
         par.omega = 0.5 
+        
 
         # c. household production
         par.alpha = 0.5
@@ -54,7 +54,7 @@ class HouseholdSpecializationModelClass:
         C = par.wM*LM + par.wF*LF
 
         # b. home production
-        H = HM**(1-par.alpha)*HF**par.alpha
+        H = (HM**(1-par.alpha)*HF**par.alpha)
 
         # c. total consumption utility
         Q = C**par.omega*H**(1-par.omega)
@@ -76,7 +76,7 @@ class HouseholdSpecializationModelClass:
         opt = SimpleNamespace()
         
         # a. all possible choices
-        x = np.linspace(0,24,49) #Hvorfor 49?
+        x = np.linspace(0,24,49)
         LM,HM,LF,HF = np.meshgrid(x,x,x,x) # all combinations
     
         LM = LM.ravel() # vector
@@ -109,13 +109,57 @@ class HouseholdSpecializationModelClass:
     def solve(self,do_print=False):
         """ solve model continously """
 
-        pass    
+        # define parameters and namespaces
+        par = self.par
+        sol = self.sol
+        opt = SimpleNamespace()  
+        
+        # constraints and bounds; 
+        # constraints define that e.g. male cannot have the sum of work hours and household hours be more than 24.
+        # bounds define that one cannot work more than 24 in either household or work hours
+        constraints_m = ({'type': 'ineq', 'fun': lambda x: 24 - x[0] - x[1]}) 
+        constraints_f = ({'type': 'ineq', 'fun': lambda x: 24 - x[2] - x[3]}) 
+        constraints = [constraints_m, constraints_f]
+        bounds = [(0,24)]*4 
+
+        # print bounds for additional info; output seems correct
+       # print("Bound test:")
+        #print(f'Bounds for [LM, HM, LF, HF]: {bounds}\n')
+
+        # call optimizer
+        initial_guess = [10]*4
+        res = optimize.minimize(lambda x: -self.calc_utility(x[0],x[1],x[2],x[3]), initial_guess, method='SLSQP', bounds=bounds, constraints=constraints)
+        
+        # save results into opt values
+        opt.LM = res.x[0]
+        opt.HM = res.x[1]
+        opt.LF = res.x[2]
+        opt.HF = res.x[3]
+
+        # print out the values of opt
+      #  print("Optimal choices:")
+     #   if do_print:
+      #      for k,v in opt.__dict__.items():
+       #         print(f'{k} = {v:6.4f}')
+
+        return opt
+    
 
     def solve_wF_vec(self,discrete=False):
         """ solve model for vector of female wages """
 
-        pass
+        sol = self.sol
+        par = self.par
 
+        for i, w_F in enumerate(par.wF_vec):
+            par.wF = w_F
+            if discrete:
+                opt = self.solve_discrete()
+            else:
+                opt = self.solve()
+            if opt is not None:
+                sol.LM_vec[i], sol.HM_vec[i], sol.LF_vec[i], sol.HF_vec[i] = opt.LM, opt.HM, opt.LF, opt.HF
+                
     def run_regression(self):
         """ run regression """
 
@@ -130,4 +174,6 @@ class HouseholdSpecializationModelClass:
     def estimate(self,alpha=None,sigma=None):
         """ estimate alpha and sigma """
 
-        pass
+        beta0_hat_list = []
+        beta1_hat_list = []
+        
