@@ -1,4 +1,4 @@
-# \[Group name\]
+# De slemme programmeringsrotter
 
 ***Group members:***
 - Nicholas Stampe Meier (KFM411)
