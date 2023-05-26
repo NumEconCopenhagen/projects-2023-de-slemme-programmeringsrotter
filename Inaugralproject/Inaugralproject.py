@@ -59,7 +59,7 @@ class HouseholdSpecializationModelClass:
             HM=np.fmax(HM, 1e-07)
             HF=np.fmax(HF, 1e-07)
             inner = (1-par.alpha)*HM**((par.sigma-1)/par.sigma)+par.alpha*HF**((par.sigma-1)/par.sigma)
-            H=np.fmax(inner, 1e-07) **(par.sigma/(par.sigme-1))
+            H=np.fmax(inner, 1e-07) **(par.sigma/(par.sigma-1))
         #Løsning for sigma = 1. Lav H om til et if statement
 
         # c. total consumption utility
