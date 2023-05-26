@@ -186,6 +186,16 @@ class HouseholdSpecializationModelClass:
         
         
         
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
 class HouseholdSpecializationModelClassExtended(HouseholdSpecializationModelClass):
 
     def estimateV2(self, alpha=None, sigma=None):
