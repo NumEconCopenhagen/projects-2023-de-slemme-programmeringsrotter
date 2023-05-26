@@ -18,6 +18,7 @@ class HouseholdSpecializationModelClass:
         par.nu = 0.001
         par.epsilon = 1.0
         par.omega = 0.5 
+        par.theta =0.0 #we use this in Q5
 
         # c. household production
         par.alpha = 0.5
@@ -70,7 +71,7 @@ class HouseholdSpecializationModelClass:
         epsilon_ = 1+1/par.epsilon
         TM = LM+HM
         TF = LF+HF
-        disutility = par.nu*(TM**epsilon_/epsilon_+TF**epsilon_/epsilon_)
+        disutility = par.nu*((HM*par.theta+TM)**epsilon_/epsilon_+TF**epsilon_/epsilon_)
         
         return utility - disutility
 
