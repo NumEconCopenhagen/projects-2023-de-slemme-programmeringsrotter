@@ -1,6 +1,6 @@
 # Data analysis project
 
-Our project is titled **Data Project on the Distribution and Specification of Births in Denmark** and is about 
+Our project is titled **Data Project on the Distribution and Specification of Births in Denmark**.
 
 The **results** of the project can be seen from running [dataproject.ipynb](dataproject.ipynb).
 
@@ -14,6 +14,6 @@ We apply the **following datasets**:
 2. Install `dstapi` with `%pip install git+https://github.com/alemartinello/dstapi` in notebook
 3. Install `pandas-datareader` with `%pip install pandas-datareader` in notebook
 
-The above dstapi and pandas-datareader have lines in the start of the notebook `dataproject.ipynb` that can be uncommented to install. Geopandas is recommended to install with conda so dependencies also are installed. For more information on downloading geopandas see https://geopandas.org/en/stable/.
+The above dstapi and pandas-datareader have lines in the start of the notebook `dataproject.ipynb` that are used to install. Geopandas is recommended to install with conda so dependencies also are installed. For more information on downloading geopandas see https://geopandas.org/en/stable/. Geopandas also has a pip-install in the notebook.
 
 
